@@ -1,4 +1,4 @@
-BOOT_LOGO := fhd
+BOOT_LOGO := swfwvga
 LOGO_IMAGE := logo.bin
 
 BIN_DIR := bin
@@ -54,7 +54,10 @@ RESOURCE_OBJ_LIST := \
     $(BOOT_LOGO)_bat_100.raw
 
 all: $(TMP_DIR) $(LOGO_IMAGE)
+
+clean:
 	rm -rf $(TMP_DIR)
+	rm -rf $(LOGO_IMAGE)
 
 $(TMP_DIR):
 	mkdir -p $(TMP_DIR)
