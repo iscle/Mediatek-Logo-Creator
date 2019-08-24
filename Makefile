@@ -53,16 +53,17 @@ RESOURCE_OBJ_LIST := \
     $(BOOT_LOGO)_bat_img.raw \
     $(BOOT_LOGO)_bat_100.raw
 
-all: $(LOGO_IMAGE)
-	rm -rf $(TMP_DIR)/*
+all: $(TMP_DIR) $(LOGO_IMAGE)
+	rm -rf $(TMP_DIR)
+
+$(TMP_DIR):
+	mkdir -p $(TMP_DIR)
 
 $(LOGO_IMAGE): $(MKIMAGE) $(BOOT_LOGO_RESOURCE) $(IMG_HDR_CFG)
 	$(MKIMAGE) $(BOOT_LOGO_RESOURCE) $(IMG_HDR_CFG) > $(LOGO_IMAGE)
 
 $(BOOT_LOGO_RESOURCE): $(ZPIPE) $(addprefix $(TMP_DIR)/,$(RESOURCE_OBJ_LIST))
-	@$(MKDIR)
 	$(ZPIPE) -l 9 $@ $(addprefix $(TMP_DIR)/,$(RESOURCE_OBJ_LIST))
 
 $(TMP_DIR)/%.raw: $(RES_DIR)/$(BOOT_LOGO)/%.bmp $(BMP_TO_RAW)
-	@$(MKDIR)
 	$(BMP_TO_RAW) $@ $<
