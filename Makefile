@@ -1,4 +1,4 @@
-BOOT_LOGO = fhd
+BOOT_LOGO := fhd
 LOGO_IMAGE := logo.bin
 
 BIN_DIR := bin
